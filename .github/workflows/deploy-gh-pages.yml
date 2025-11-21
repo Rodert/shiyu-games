@@ -25,7 +25,7 @@ jobs:
     
     strategy:
       matrix:
-        game: [snake-game]
+        game: [snake-game, tetris-game]
         node-version: [18.x]
     
     steps:
@@ -82,17 +82,24 @@ jobs:
         working-directory: snake-game
         run: npm run build
       
-      - name: 📥 Download build artifacts
+      - name: 📥 Download snake-game artifacts
         uses: actions/download-artifact@v4
         with:
           name: snake-game-dist
           path: snake-game/dist
+      
+      - name: 📥 Download tetris-game artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: tetris-game-dist
+          path: tetris-game/dist
       
       - name: 📁 Create deployment directory
         run: |
           mkdir -p deploy
           cp index.html deploy/
           cp -r snake-game/dist deploy/snake-game
+          cp -r tetris-game/dist deploy/tetris-game
       
       - name: 🔧 Setup Pages
         uses: actions/configure-pages@v4
