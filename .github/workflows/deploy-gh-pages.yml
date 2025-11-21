@@ -25,7 +25,7 @@ jobs:
     
     strategy:
       matrix:
-        game: [snake-game, tetris-game, flappy-bird, 2048-game]
+        game: [snake-game, tetris-game, flappy-bird, 2048-game, maze-game, jump-game, airplane-game, whack-mole, speed-tetris]
         node-version: [18.x]
     
     steps:
@@ -91,6 +91,36 @@ jobs:
           name: 2048-game-dist
           path: 2048-game/dist
       
+      - name: 📥 Download maze-game artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: maze-game-dist
+          path: maze-game/dist
+      
+      - name: 📥 Download jump-game artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: jump-game-dist
+          path: jump-game/dist
+      
+      - name: 📥 Download airplane-game artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: airplane-game-dist
+          path: airplane-game/dist
+      
+      - name: 📥 Download whack-mole artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: whack-mole-dist
+          path: whack-mole/dist
+      
+      - name: 📥 Download speed-tetris artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: speed-tetris-dist
+          path: speed-tetris/dist
+      
       - name: 📁 Create deployment directory
         run: |
           mkdir -p deploy
@@ -99,6 +129,11 @@ jobs:
           cp -r tetris-game/dist deploy/tetris-game
           cp -r flappy-bird/dist deploy/flappy-bird
           cp -r 2048-game/dist deploy/2048-game
+          cp -r maze-game/dist deploy/maze-game
+          cp -r jump-game/dist deploy/jump-game
+          cp -r airplane-game/dist deploy/airplane-game
+          cp -r whack-mole/dist deploy/whack-mole
+          cp -r speed-tetris/dist deploy/speed-tetris
       
       - name: 🔧 Setup Pages
         uses: actions/configure-pages@v4
