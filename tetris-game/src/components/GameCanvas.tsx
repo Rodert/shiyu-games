@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 interface GameCanvasProps {
-  grid: number[][]
+  grid: (string | number)[][]
   currentPiece: number[][] | null
   currentColor: string | null
   position: { x: number; y: number }

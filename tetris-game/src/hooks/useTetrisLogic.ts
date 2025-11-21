@@ -78,7 +78,7 @@ export const useTetrisLogic = () => {
   }, [spawnNewPiece])
 
   // 检查碰撞
-  const checkCollision = useCallback((piece: number[][], x: number, y: number, grid: number[][]) => {
+  const checkCollision = useCallback((piece: number[][], x: number, y: number, grid: (string | number)[][]) => {
     for (let row = 0; row < piece.length; row++) {
       for (let col = 0; col < piece[row].length; col++) {
         if (piece[row][col]) {
