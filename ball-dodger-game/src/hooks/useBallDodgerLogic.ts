@@ -80,7 +80,7 @@ export const useBallDodgerLogic = () => {
           balls: [...prev.balls, newBall],
         }
       })
-    }, 1000 / (1 + prev.level * 0.2))
+    }, 1000 / (1 + gameState.level * 0.2))
 
     return () => clearInterval(spawnInterval)
   }, [gameState.gameStarted, gameState.gameOver, gameState.level])
