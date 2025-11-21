@@ -1,22 +1,59 @@
+import { useParkourLogic } from './hooks/useParkourLogic'
+import { ParkourUI } from './components/ParkourUI'
+
 export default function App() {
+  const {
+    player,
+    obstacles,
+    clouds,
+    score,
+    gameOver,
+    isPaused,
+    gameStarted,
+    difficulty,
+    highScore,
+    jump,
+    changeDifficulty,
+    CANVAS_WIDTH,
+    CANVAS_HEIGHT,
+    PLAYER_WIDTH,
+    PLAYER_HEIGHT,
+    GROUND_Y,
+  } = useParkourLogic()
+
+  const handleRestart = () => {
+    window.location.reload()
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center p-4">
-      <div className="max-w-6xl w-full">
-        <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold mb-2" style={{
-            background: 'linear-gradient(135deg, #00ff41, #00ffff)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}>
-            🌀 迷宫生成器
-          </h1>
-          <p className="text-neon-cyan text-lg">Maze Game - 随机闯关冒险</p>
-        </div>
-        <div className="text-center text-gray-400">
-          <p className="text-xl mb-4">🚧 游戏开发中...</p>
-          <p className="mb-4">敬请期待！</p>
-          <a href="../" className="text-neon-cyan hover:text-neon-lime transition-colors">← 返回游戏中心</a>
+      <div className="w-full">
+        <ParkourUI
+          gameState={{
+            player,
+            obstacles,
+            clouds,
+            score,
+            gameOver,
+            isPaused,
+            gameStarted,
+            difficulty,
+            highScore,
+          }}
+          onJump={jump}
+          onChangeDifficulty={changeDifficulty}
+          onRestart={handleRestart}
+          canvasWidth={CANVAS_WIDTH}
+          canvasHeight={CANVAS_HEIGHT}
+          playerWidth={PLAYER_WIDTH}
+          playerHeight={PLAYER_HEIGHT}
+          groundY={GROUND_Y}
+        />
+
+        <div className="text-center mt-8">
+          <a href="../" className="text-neon-cyan hover:text-neon-lime transition-colors text-lg">
+            ← 返回游戏中心
+          </a>
         </div>
       </div>
     </div>
