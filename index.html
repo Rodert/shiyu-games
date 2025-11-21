@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 仕宇游戏合集 - Shiyu Games</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #00ff41, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #00ffff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .description {
+            font-size: 1rem;
+            color: #b0b0b0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #00ff41;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(0, 255, 65, 0.3);
+            border-color: #00ffff;
+        }
+
+        .game-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .game-name {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #00ff41;
+        }
+
+        .game-description {
+            font-size: 0.95rem;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .game-link {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #00ff41, #00ffff);
+            color: #000;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .game-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            color: #00ff41;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #b0b0b0;
+            margin-top: 5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
+            color: #b0b0b0;
+        }
+
+        .links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .links a {
+            color: #00ff41;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .links a:hover {
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 仕宇游戏合集</h1>
+            <p class="subtitle">Shiyu Games Collection</p>
+            <p class="description">
+                一个现代化的游戏合集，使用最新的前端技术构建。
+                每个游戏都经过精心设计，提供流畅的游戏体验。
+            </p>
+        </header>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">1</div>
+                <div class="stat-label">已发布游戏</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">持续更新中</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">开源免费</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">MIT</div>
+                <div class="stat-label">开源许可</div>
+            </div>
+        </div>
+
+        <div class="games-grid">
+            <div class="game-card">
+                <div class="game-icon">🐍</div>
+                <div class="game-name">贪吃蛇</div>
+                <p class="game-description">
+                    一个炫酷的现代化贪吃蛇游戏，采用 React + TypeScript + Canvas 构建。
+                    支持暂停、难度递增、实时统计等功能。
+                </p>
+                <a href="/snake-game/" class="game-link">🎮 开始游戏</a>
+            </div>
+
+            <!-- 更多游戏将在这里添加 -->
+            <div class="game-card" style="opacity: 0.6;">
+                <div class="game-icon">🎮</div>
+                <div class="game-name">敬请期待</div>
+                <p class="game-description">
+                    我们正在开发更多有趣的游戏。
+                    敬请关注项目更新！
+                </p>
+                <button class="game-link" disabled style="opacity: 0.6; cursor: not-allowed;">
+                    即将推出
+                </button>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2024 仕宇游戏合集 (Shiyu Games). All rights reserved.</p>
+            <div class="links">
+                <a href="https://github.com/Rodert/shiyu-games" target="_blank">📦 GitHub</a>
+                <a href="https://github.com/Rodert/shiyu-games/issues" target="_blank">🐛 报告问题</a>
+                <a href="https://github.com/Rodert/shiyu-games/blob/main/LICENSE" target="_blank">📄 许可证</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

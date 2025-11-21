@@ -1,0 +1,109 @@
+name: 🚀 Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        game: [snake-game]
+        node-version: [18.x]
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: 📦 Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: '${{ matrix.game }}/package-lock.json'
+      
+      - name: 📚 Install dependencies
+        working-directory: ${{ matrix.game }}
+        run: npm ci
+      
+      - name: 🏗️ Build project
+        working-directory: ${{ matrix.game }}
+        run: npm run build
+      
+      - name: 📤 Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.game }}-dist
+          path: ${{ matrix.game }}/dist
+          retention-days: 1
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: 'npm'
+          cache-dependency-path: 'snake-game/package-lock.json'
+      
+      - name: 📚 Install dependencies
+        working-directory: snake-game
+        run: npm ci
+      
+      - name: 🏗️ Build project
+        working-directory: snake-game
+        run: npm run build
+      
+      - name: 📁 Create deployment directory
+        run: |
+          mkdir -p deploy
+          cp index.html deploy/
+          cp -r snake-game/dist deploy/snake-game
+      
+      - name: 🔧 Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: 📤 Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'deploy'
+      
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      
+      - name: 📝 Create deployment summary
+        run: |
+          echo "## 🎮 GitHub Pages Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Build completed successfully" >> $GITHUB_STEP_SUMMARY
+          echo "🚀 Deployed to GitHub Pages" >> $GITHUB_STEP_SUMMARY
+          echo "📍 URL: ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY

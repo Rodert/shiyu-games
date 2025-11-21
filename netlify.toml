@@ -1,0 +1,43 @@
+# Netlify Configuration for shiyu-games
+
+# Build settings for snake-game
+[[redirects]]
+  from = "/snake-game/*"
+  to = "/snake-game/index.html"
+  status = 200
+
+# Default redirect
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Cache settings
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/snake-game/dist/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Build configuration
+[build]
+  command = "npm run build --prefix snake-game"
+  publish = "snake-game/dist"
+  functions = "functions"
+
+# Environment variables
+[context.production]
+  command = "npm run build --prefix snake-game"
+  publish = "snake-game/dist"
+
+[context.deploy-preview]
+  command = "npm run build --prefix snake-game"
+  publish = "snake-game/dist"
+
+[context.branch-deploy]
+  command = "npm run build --prefix snake-game"
+  publish = "snake-game/dist"

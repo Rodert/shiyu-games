@@ -1,0 +1,89 @@
+name: 🚀 Deploy Games
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        game: [snake-game]
+        node-version: [18.x]
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: 📦 Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: '${{ matrix.game }}/package-lock.json'
+      
+      - name: 📚 Install dependencies
+        working-directory: ${{ matrix.game }}
+        run: npm ci
+      
+      - name: 🔍 Run linter (if available)
+        working-directory: ${{ matrix.game }}
+        run: npm run lint --if-present
+        continue-on-error: true
+      
+      - name: 🧪 Run tests (if available)
+        working-directory: ${{ matrix.game }}
+        run: npm test --if-present
+        continue-on-error: true
+      
+      - name: 🏗️ Build project
+        working-directory: ${{ matrix.game }}
+        run: npm run build
+      
+      - name: 📤 Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.game }}-dist
+          path: ${{ matrix.game }}/dist
+          retention-days: 7
+      
+      - name: 🚀 Deploy to Netlify
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: netlify/actions/build@master
+        with:
+          args: deploy --prod --dir=${{ matrix.game }}/dist
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      
+      - name: 📝 Create deployment summary
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          echo "## 🎮 ${{ matrix.game }} Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Build completed successfully" >> $GITHUB_STEP_SUMMARY
+          echo "📦 Artifact: ${{ matrix.game }}-dist" >> $GITHUB_STEP_SUMMARY
+          echo "🚀 Deployed to Netlify" >> $GITHUB_STEP_SUMMARY
+
+  deploy-status:
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+    if: always()
+    
+    steps:
+      - name: 📊 Deployment Status
+        run: |
+          if [ "${{ needs.build-and-deploy.result }}" == "success" ]; then
+            echo "✅ All games deployed successfully!"
+          else
+            echo "❌ Deployment failed"
+            exit 1
+          fi
