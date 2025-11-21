@@ -22,11 +22,13 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     
     strategy:
       matrix:
-        game: [snake-game, tetris-game, flappy-bird, 2048-game, maze-game, jump-game, airplane-game, whack-mole, speed-tetris, tic-tac-toe-game, gomoku-game, sliding-puzzle-game, jigsaw-puzzle-game, memory-card-game, reaction-test-game, color-difference-game, parkour-game, fruit-hero-game, shadow-run-game, ball-dodger-game, geometry-dash-game, racing-game, stickman-fight-game, rhythm-game, typing-game, space-shooter-game, tower-defense-game, bubble-pop-game, rock-paper-scissors-game, emoji-match-game, math-challenge-game]
+        game: [snake-game, tetris-game, flappy-bird, 2048-game, maze-game, jump-game, airplane-game, whack-mole, speed-tetris, tic-tac-toe-game, gomoku-game, sliding-puzzle-game, jigsaw-puzzle-game, memory-card-game, reaction-test-game, color-difference-game, parkour-game, fruit-hero-game, shadow-run-game, ball-dodger-game, geometry-dash-game, racing-game, stickman-fight-game, rhythm-game, typing-game, space-shooter-game, tower-defense-game, bubble-pop-game, rock-paper-scissors-game, emoji-match-game, math-challenge-game, flappy-parkour-game, rhythm-tap-game, typing-master-game]
         node-version: [18.x]
+      max-parallel: 6
     
     steps:
       - name: 📥 Checkout code
@@ -57,6 +59,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     
     environment:
@@ -67,227 +70,38 @@ jobs:
       - name: 📥 Checkout code
         uses: actions/checkout@v4
       
-      - name: 📥 Download snake-game artifacts
+      - name: 📥 Download all artifacts
         uses: actions/download-artifact@v4
         with:
-          name: snake-game-dist
-          path: snake-game/dist
-      
-      - name: 📥 Download tetris-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: tetris-game-dist
-          path: tetris-game/dist
-      
-      - name: 📥 Download flappy-bird artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: flappy-bird-dist
-          path: flappy-bird/dist
-      
-      - name: 📥 Download 2048-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: 2048-game-dist
-          path: 2048-game/dist
-      
-      - name: 📥 Download maze-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: maze-game-dist
-          path: maze-game/dist
-      
-      - name: 📥 Download jump-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: jump-game-dist
-          path: jump-game/dist
-      
-      - name: 📥 Download airplane-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: airplane-game-dist
-          path: airplane-game/dist
-      
-      - name: 📥 Download whack-mole artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: whack-mole-dist
-          path: whack-mole/dist
-      
-      - name: 📥 Download speed-tetris artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: speed-tetris-dist
-          path: speed-tetris/dist
-      
-      - name: 📥 Download tic-tac-toe-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: tic-tac-toe-game-dist
-          path: tic-tac-toe-game/dist
-      
-      - name: 📥 Download gomoku-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: gomoku-game-dist
-          path: gomoku-game/dist
-      
-      - name: 📥 Download sliding-puzzle-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: sliding-puzzle-game-dist
-          path: sliding-puzzle-game/dist
-      
-      - name: 📥 Download jigsaw-puzzle-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: jigsaw-puzzle-game-dist
-          path: jigsaw-puzzle-game/dist
-      
-      - name: 📥 Download memory-card-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: memory-card-game-dist
-          path: memory-card-game/dist
-      
-      - name: 📥 Download reaction-test-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: reaction-test-game-dist
-          path: reaction-test-game/dist
-      
-      - name: 📥 Download color-difference-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: color-difference-game-dist
-          path: color-difference-game/dist
-      
-      - name: 📥 Download parkour-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: parkour-game-dist
-          path: parkour-game/dist
-      
-      - name: 📥 Download fruit-hero-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: fruit-hero-game-dist
-          path: fruit-hero-game/dist
-      
-      - name: 📥 Download shadow-run-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: shadow-run-game-dist
-          path: shadow-run-game/dist
-      
-      - name: 📥 Download ball-dodger-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: ball-dodger-game-dist
-          path: ball-dodger-game/dist
-      
-      - name: 📥 Download geometry-dash-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: geometry-dash-game-dist
-          path: geometry-dash-game/dist
-      
-      - name: 📥 Download racing-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: racing-game-dist
-          path: racing-game/dist
-      
-      - name: 📥 Download stickman-fight-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: stickman-fight-game-dist
-          path: stickman-fight-game/dist
-      
-      - name: 📥 Download rhythm-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: rhythm-game-dist
-          path: rhythm-game/dist
-      
-      - name: 📥 Download typing-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: typing-game-dist
-          path: typing-game/dist
-      
-      - name: 📥 Download space-shooter-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: space-shooter-game-dist
-          path: space-shooter-game/dist
-      
-      - name: 📥 Download tower-defense-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: tower-defense-game-dist
-          path: tower-defense-game/dist
-      
-      - name: 📥 Download bubble-pop-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: bubble-pop-game-dist
-          path: bubble-pop-game/dist
-      
-      - name: 📥 Download rock-paper-scissors-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: rock-paper-scissors-game-dist
-          path: rock-paper-scissors-game/dist
-      
-      - name: 📥 Download emoji-match-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: emoji-match-game-dist
-          path: emoji-match-game/dist
-      
-      - name: 📥 Download math-challenge-game artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: math-challenge-game-dist
-          path: math-challenge-game/dist
+          path: artifacts
       
       - name: 📁 Create deployment directory
         run: |
           mkdir -p deploy
           cp index.html deploy/
-          cp -r snake-game/dist deploy/snake-game
-          cp -r tetris-game/dist deploy/tetris-game
-          cp -r flappy-bird/dist deploy/flappy-bird
-          cp -r 2048-game/dist deploy/2048-game
-          cp -r maze-game/dist deploy/maze-game
-          cp -r jump-game/dist deploy/jump-game
-          cp -r airplane-game/dist deploy/airplane-game
-          cp -r whack-mole/dist deploy/whack-mole
-          cp -r speed-tetris/dist deploy/speed-tetris
-          cp -r tic-tac-toe-game/dist deploy/tic-tac-toe-game
-          cp -r gomoku-game/dist deploy/gomoku-game
-          cp -r sliding-puzzle-game/dist deploy/sliding-puzzle-game
-          cp -r jigsaw-puzzle-game/dist deploy/jigsaw-puzzle-game
-          cp -r memory-card-game/dist deploy/memory-card-game
-          cp -r reaction-test-game/dist deploy/reaction-test-game
-          cp -r color-difference-game/dist deploy/color-difference-game
-          cp -r parkour-game/dist deploy/parkour-game
-          cp -r fruit-hero-game/dist deploy/fruit-hero-game
-          cp -r shadow-run-game/dist deploy/shadow-run-game
-          cp -r ball-dodger-game/dist deploy/ball-dodger-game
-          cp -r geometry-dash-game/dist deploy/geometry-dash-game
-          cp -r racing-game/dist deploy/racing-game
-          cp -r stickman-fight-game/dist deploy/stickman-fight-game
-          cp -r rhythm-game/dist deploy/rhythm-game
-          cp -r typing-game/dist deploy/typing-game
-          cp -r space-shooter-game/dist deploy/space-shooter-game
-          cp -r tower-defense-game/dist deploy/tower-defense-game
-          cp -r bubble-pop-game/dist deploy/bubble-pop-game
-          cp -r rock-paper-scissors-game/dist deploy/rock-paper-scissors-game
-          cp -r emoji-match-game/dist deploy/emoji-match-game
-          cp -r math-challenge-game/dist deploy/math-challenge-game
+          
+          # 定义所有游戏列表
+          GAMES=(
+            "snake-game" "tetris-game" "flappy-bird" "2048-game" "maze-game"
+            "jump-game" "airplane-game" "whack-mole" "speed-tetris" "tic-tac-toe-game"
+            "gomoku-game" "sliding-puzzle-game" "jigsaw-puzzle-game" "memory-card-game"
+            "reaction-test-game" "color-difference-game" "parkour-game" "fruit-hero-game"
+            "shadow-run-game" "ball-dodger-game" "geometry-dash-game" "racing-game"
+            "stickman-fight-game" "rhythm-game" "typing-game" "space-shooter-game"
+            "tower-defense-game" "bubble-pop-game" "rock-paper-scissors-game"
+            "emoji-match-game" "math-challenge-game" "flappy-parkour-game"
+            "rhythm-tap-game" "typing-master-game"
+          )
+          
+          # 复制所有游戏的构建产物
+          for game in "${GAMES[@]}"; do
+            if [ -d "artifacts/${game}-dist" ]; then
+              cp -r "artifacts/${game}-dist" "deploy/${game}"
+            fi
+          done
+          
+          echo "✅ 部署目录已准备完毕"
+          ls -la deploy/ | head -20
       
       - name: 🔧 Setup Pages
         uses: actions/configure-pages@v4
