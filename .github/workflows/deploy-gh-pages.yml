@@ -41,7 +41,7 @@ jobs:
       
       - name: 📚 Install dependencies
         working-directory: ${{ matrix.game }}
-        run: npm ci
+        run: npm install
       
       - name: 🏗️ Build project
         working-directory: ${{ matrix.game }}
