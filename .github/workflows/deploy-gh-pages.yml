@@ -37,7 +37,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          cache-dependency-path: '${{ matrix.game }}/package-lock.json'
+          cache-dependency-path: '${{ matrix.game }}/package.json'
       
       - name: 📚 Install dependencies
         working-directory: ${{ matrix.game }}
@@ -66,21 +66,6 @@ jobs:
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v4
-      
-      - name: 📦 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
-          cache: 'npm'
-          cache-dependency-path: 'snake-game/package-lock.json'
-      
-      - name: 📚 Install dependencies
-        working-directory: snake-game
-        run: npm ci
-      
-      - name: 🏗️ Build project
-        working-directory: snake-game
-        run: npm run build
       
       - name: 📥 Download snake-game artifacts
         uses: actions/download-artifact@v4
