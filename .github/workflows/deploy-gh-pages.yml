@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          cache-dependency-path: '${{ matrix.game }}/package.json'
+          cache-dependency-path: '${{ matrix.game }}/package-lock.json'
       
       - name: 📚 Install dependencies
         working-directory: ${{ matrix.game }}
