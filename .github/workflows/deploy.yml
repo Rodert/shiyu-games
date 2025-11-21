@@ -1,14 +1,10 @@
-name: 🚀 Deploy Games
+name: 🚀 Deploy Games (Netlify - Disabled)
+
+# 此工作流已禁用，使用 deploy-gh-pages.yml 进行 GitHub Pages 部署
+# This workflow is disabled, use deploy-gh-pages.yml for GitHub Pages deployment
 
 on:
-  push:
-    branches:
-      - main
-      - master
-  pull_request:
-    branches:
-      - main
-      - master
+  workflow_dispatch:  # 仅手动触发
 
 jobs:
   build-and-deploy:
