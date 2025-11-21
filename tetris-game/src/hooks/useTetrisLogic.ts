@@ -27,7 +27,7 @@ const TETRIS_COLORS = {
 }
 
 export interface GameState {
-  grid: number[][]
+  grid: (string | number)[][]
   currentPiece: number[][] | null
   currentColor: string | null
   position: { x: number; y: number }
@@ -113,7 +113,7 @@ export const useTetrisLogic = () => {
             const y = position.y + row
             const x = position.x + col
             if (y >= 0 && y < GRID_HEIGHT && x >= 0 && x < GRID_WIDTH) {
-              newGrid[y][x] = currentColor ? 1 : 0
+              newGrid[y][x] = currentColor || '#00ff41'
             }
           }
         }

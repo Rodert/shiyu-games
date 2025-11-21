@@ -51,12 +51,14 @@ export const GameCanvas = ({
     // 绘制已放置的方块
     for (let row = 0; row < GRID_HEIGHT; row++) {
       for (let col = 0; col < GRID_WIDTH; col++) {
-        if (grid[row][col]) {
+        const cell = grid[row][col]
+        if (cell) {
           const x = col * CELL_SIZE
           const y = row * CELL_SIZE
+          const color = typeof cell === 'string' ? cell : '#00ff41'
 
           // 绘制方块
-          ctx.fillStyle = '#00ff41'
+          ctx.fillStyle = color
           ctx.fillRect(x + 2, y + 2, CELL_SIZE - 4, CELL_SIZE - 4)
 
           // 绘制霓虹灯效果
@@ -65,7 +67,7 @@ export const GameCanvas = ({
           ctx.strokeRect(x + 2, y + 2, CELL_SIZE - 4, CELL_SIZE - 4)
 
           // 阴影效果
-          ctx.fillStyle = 'rgba(0, 255, 65, 0.3)'
+          ctx.fillStyle = `${color}4d`
           ctx.fillRect(x + 2, y + 2, CELL_SIZE - 4, CELL_SIZE - 4)
         }
       }
