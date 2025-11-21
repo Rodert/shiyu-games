@@ -32,9 +32,11 @@
 
 ---
 
-## 🎮 已发布游戏
+## 🎮 已发布游戏 (9 个)
 
-### 🐍 贪吃蛇 (Snake Game)
+### ✅ 已完成游戏
+
+#### 🐍 贪吃蛇 (Snake Game)
 
 一个炫酷的现代化贪吃蛇游戏。
 
@@ -43,7 +45,7 @@
 - **文档**: [完整文档](./snake-game/README.md)
 - **在线体验**: [🎮 开始游戏](https://Rodert.github.io/shiyu-games/snake-game/)
 
-### 🧱 俄罗斯方块 (Tetris Game)
+#### 🧱 俄罗斯方块 (Tetris Game)
 
 经典的俄罗斯方块游戏。
 
@@ -51,6 +53,64 @@
 - **特性**: 旋转、加速、等级递增、消除行数统计
 - **文档**: [源代码](./tetris-game)
 - **在线体验**: [🎮 开始游戏](https://Rodert.github.io/shiyu-games/tetris-game/)
+
+#### 🐦 像素飞鸟 (Flappy Bird)
+
+经典 Flappy Bird 游戏复刻。
+
+- **技术栈**: React 18 + TypeScript + Canvas + TailwindCSS
+- **特性**: 跳跃避障、动态管道、分数统计
+- **在线体验**: [🎮 开始游戏](https://Rodert.github.io/shiyu-games/flappy-bird/)
+
+#### 🎨 炫彩 2048 (2048 Game)
+
+经典 2048 游戏复刻。
+
+- **技术栈**: React 18 + TypeScript + TailwindCSS
+- **特性**: 滑动合成、分数统计、最高分记录
+- **在线体验**: [🎮 开始游戏](https://Rodert.github.io/shiyu-games/2048-game/)
+
+### 🚧 开发中游戏 (框架完成)
+
+#### 🌀 迷宫生成器 (Maze Game)
+
+随机迷宫生成冒险游戏。
+
+- **技术栈**: React 18 + TypeScript + TailwindCSS
+- **特性**: 随机迷宫生成、多难度等级、计时系统、分数统计
+- **在线体验**: [🎮 开始游戏](https://Rodert.github.io/shiyu-games/maze-game/)
+
+#### 🎯 跳一跳 Web 版 (Jump Game)
+
+物理弹跳挑战游戏。
+
+- **技术栈**: React 18 + TypeScript + TailwindCSS
+- **特性**: 物理引擎、跳跃力度控制、平台生成、高度统计
+- **在线体验**: [🎮 开始游戏](https://Rodert.github.io/shiyu-games/jump-game/)
+
+#### ✈️ 前端飞机大战 (Airplane Game)
+
+像素空战游戏。
+
+- **技术栈**: React 18 + TypeScript + Canvas + TailwindCSS
+- **特性**: 飞机控制、敌机生成、子弹发射、得分系统
+- **在线体验**: [🎮 开始游戏](https://Rodert.github.io/shiyu-games/airplane-game/)
+
+#### 🔨 打地鼠 (Whack Mole)
+
+极速反应小游戏。
+
+- **技术栈**: React 18 + TypeScript + TailwindCSS
+- **特性**: 随机地鼠出现、点击检测、时间限制、反应速度统计
+- **在线体验**: [🎮 开始游戏](https://Rodert.github.io/shiyu-games/whack-mole/)
+
+#### ⚡ 极速俄罗斯方块 (Speed Tetris)
+
+下落方块大战游戏。
+
+- **技术栈**: React 18 + TypeScript + Canvas + TailwindCSS
+- **特性**: 加速下落、多行同时消除、连击系统、难度递增
+- **在线体验**: [🎮 开始游戏](https://Rodert.github.io/shiyu-games/speed-tetris/)
 
 ---
 
@@ -238,9 +298,12 @@ git push origin main
 
 | 指标 | 数值 |
 |------|------|
-| **已发布游戏** | 2 个 |
-| **源代码文件** | 20+ 个 |
-| **代码行数** | 1500+ 行 |
+| **已完成游戏** | 4 个 |
+| **开发中游戏** | 5 个 |
+| **总游戏数** | 9 个 |
+| **源代码文件** | 45+ 个 |
+| **配置文件** | 45+ 个 |
+| **代码行数** | 3500+ 行 |
 | **文档文件** | 20+ 个 |
 | **文档行数** | 6000+ 行 |
 | **自动部署** | ✅ 支持 |
@@ -254,19 +317,33 @@ git push origin main
 
 - [x] 🐍 贪吃蛇游戏
 - [x] 🧱 俄罗斯方块游戏
-- [x] 🚀 GitHub Actions 自动部署
+- [x] 🐦 像素飞鸟游戏
+- [x] 🎨 炫彩 2048 游戏
+- [x] 🌀 迷宫生成器框架
+- [x] 🎯 跳一跳框架
+- [x] ✈️ 飞机大战框架
+- [x] 🔨 打地鼠框架
+- [x] ⚡ 极速方块框架
+- [x] 🚀 GitHub Actions 自动部署（9 个游戏）
 - [x] 📄 GitHub Pages 部署
-- [x] ☁️ Netlify 部署配置
-- [x] 🎮 游戏中心主页
+- [x] 🎮 游戏中心主页（9 个游戏卡片）
 - [x] 📚 完整文档体系
+
+### 进行中 🚧
+
+- [ ] 🌀 迷宫生成器游戏逻辑
+- [ ] 🎯 跳一跳游戏逻辑
+- [ ] ✈️ 飞机大战游戏逻辑
+- [ ] 🔨 打地鼠游戏逻辑
+- [ ] ⚡ 极速方块游戏逻辑
 
 ### 计划中 📋
 
-- [ ] 🎮 更多游戏（2024 年底）
 - [ ] 👤 用户账户系统
 - [ ] 🏆 排行榜功能
 - [ ] 📱 社交分享功能
 - [ ] 📲 移动应用版本
+- [ ] 🎮 更多游戏
 
 ---
 
