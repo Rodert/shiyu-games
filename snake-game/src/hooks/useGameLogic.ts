@@ -33,7 +33,7 @@ export const useGameLogic = () => {
     speed: INITIAL_SPEED,
   })
 
-  const gameLoopRef = useRef<NodeJS.Timeout | null>(null)
+  const gameLoopRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Generate random food position
   const generateFood = useCallback((snake: Position[]): Position => {

@@ -27,7 +27,7 @@ export const useReactionTestLogic = () => {
     averageTime: 0,
   })
 
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const startTimeRef = useRef<number | null>(null)
 
   // 开始测试
