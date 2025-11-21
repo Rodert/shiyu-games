@@ -25,7 +25,7 @@ jobs:
     
     strategy:
       matrix:
-        game: [snake-game, tetris-game, flappy-bird]
+        game: [snake-game, tetris-game, flappy-bird, 2048-game]
         node-version: [18.x]
     
     steps:
@@ -85,6 +85,12 @@ jobs:
           name: flappy-bird-dist
           path: flappy-bird/dist
       
+      - name: 📥 Download 2048-game artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: 2048-game-dist
+          path: 2048-game/dist
+      
       - name: 📁 Create deployment directory
         run: |
           mkdir -p deploy
@@ -92,6 +98,7 @@ jobs:
           cp -r snake-game/dist deploy/snake-game
           cp -r tetris-game/dist deploy/tetris-game
           cp -r flappy-bird/dist deploy/flappy-bird
+          cp -r 2048-game/dist deploy/2048-game
       
       - name: 🔧 Setup Pages
         uses: actions/configure-pages@v4
