@@ -82,6 +82,12 @@ jobs:
         working-directory: snake-game
         run: npm run build
       
+      - name: 📥 Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: snake-game-dist
+          path: snake-game/dist
+      
       - name: 📁 Create deployment directory
         run: |
           mkdir -p deploy
