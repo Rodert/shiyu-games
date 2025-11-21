@@ -1,5 +1,5 @@
 import React from 'react'
-import { RotateCcw, Play, Pause2 } from 'lucide-react'
+import { RotateCcw, Play, Pause } from 'lucide-react'
 import type { Bubble } from '../hooks/useBubblePopLogic'
 
 interface BubblePopUIProps {
@@ -109,7 +109,7 @@ export const BubblePopUI: React.FC<BubblePopUIProps> = ({
             onClick={onTogglePause}
             className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-neon-cyan text-black font-bold rounded-lg hover:bg-neon-lime transition-colors"
           >
-            {isPaused ? <Play size={20} /> : <Pause2 size={20} />}
+            {isPaused ? <Play size={20} /> : <Pause size={20} />}
             {isPaused ? '继续' : '暂停'}
           </button>
         </div>
